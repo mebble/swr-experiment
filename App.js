@@ -47,8 +47,12 @@ const App = () => {
                 ))}
             </ul>
             <form onSubmit={handleSubmit}>
-                <label>Title: <input name="title" value={title} onChange={e => setTitle(e.target.value)} /></label><br />
-                <label>Author: <input name="author" value={author} onChange={e => setAuthor(e.target.value)} /></label>
+                <label>
+                    <input name="title" value={title} onChange={e => setTitle(e.target.value)} /> Title
+                </label><br />
+                <label>
+                    <input name="author" value={author} onChange={e => setAuthor(e.target.value)} /> Author
+                </label><br />
                 <button type="submit">Add Post</button>
             </form>
         </div>
