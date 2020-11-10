@@ -3,25 +3,32 @@ import useSWR, { mutate } from 'swr';
 
 const postsUrl = 'http://localhost:3000/posts';
 
+const getPosts = url => {
+    return fetch(url).then(res => res.json());
+};
+
+const postNewPost = async (url, newPost) => {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newPost)
+    })
+    const newPostResponse = await response.json();
+    return newPostResponse;
+};
+
 const App = () => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
-    const { data: posts, error } = useSWR(postsUrl, url => {
-        return fetch(url).then(res => res.json())
-    });
+    const { data: posts, error } = useSWR(postsUrl, url => getPosts(url));
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         mutate(postsUrl, async posts => {
-            const response = await fetch(postsUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id: Math.random(), title, author })
-            })
-            const newPost = await response.json();
+            const newPost = await postNewPost(postsUrl, { id: Math.random(), title, author });
             return [...posts, newPost];
         });
     };
