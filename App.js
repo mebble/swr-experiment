@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useSWR from 'swr';
 
+const postsUrl = 'http://localhost:3000/posts';
+
 const App = () => {
-    const { data: posts, error } = useSWR('http://localhost:3000/posts', url => {
+    const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
+    const { data: posts, error } = useSWR(postsUrl, url => {
         return fetch(url).then(res => res.json())
     });
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    };
+
     if (error) return <p>Error!</p>;
     if (!posts) return <p>Loading...</p>;
     return (
@@ -18,6 +27,11 @@ const App = () => {
                     </li>
                 ))}
             </ul>
+            <form onSubmit={handleSubmit}>
+                <label>Title: <input name="title" value={title} onChange={e => setTitle(e.target.value)} /></label><br />
+                <label>Author: <input name="author" value={author} onChange={e => setAuthor(e.target.value)} /></label>
+                <button type="submit">Add Post</button>
+            </form>
         </div>
     );
 };
