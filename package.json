@@ -20,5 +20,13 @@
   "devDependencies": {
     "json-server": "^0.16.1",
     "parcel": "^1.12.4"
+  },
+  "browserslist": [
+    "last 3 Chrome versions",
+    "Firefox 63",
+    "Node 11"
+  ],
+  "browser": {
+    "process": false
   }
 }

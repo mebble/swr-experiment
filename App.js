@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 
 const postsUrl = 'http://localhost:3000/posts';
 
@@ -12,6 +12,18 @@ const App = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        mutate(postsUrl, async posts => {
+            const response = await fetch(postsUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: Math.random(), title, author })
+            })
+            const newPost = await response.json();
+            return [...posts, newPost];
+        });
     };
 
     if (error) return <p>Error!</p>;
