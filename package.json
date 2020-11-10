@@ -1,0 +1,24 @@
+{
+  "name": "swr-tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:client": "parcel index.html",
+    "build:client": "parcel build index.html",
+    "dev:server": "json-server --watch db.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "swr": "^0.2.2"
+  },
+  "devDependencies": {
+    "json-server": "^0.16.1",
+    "parcel": "^1.12.4"
+  }
+}

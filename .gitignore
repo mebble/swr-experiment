@@ -1,0 +1,9 @@
+# json-server
+db.json
+
+# npm
+node_modules/
+
+# parcel
+dist/
+.cache/
